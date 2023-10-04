@@ -14,3 +14,7 @@ def hello_world():
   gtag('config', 'G-TP5LRMBZ8T');
 </script>"""
     return "<p>ALLEZ L'OM!</p>" + variable
+@app.route("/logger")
+def logger():
+    app.logger.info('test log')
+    return "log informations"
