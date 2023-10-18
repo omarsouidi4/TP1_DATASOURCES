@@ -103,5 +103,34 @@ def google_request():
     req = requests.get("https://www.google.com/")
     return req.cookies.get_dict()
 
+@app.route('/fetch-analytics', methods=['GET'])
+def fetch_google_analytics_data():
+
+  
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'C:\\Users\\omars\\OneDrive\\Bureau\\EPF 5A\\DATA_SOURCES\\TP1\\myproject\\datasourcestp2-0a48555e151c.json'
+    PROPERTY_ID = '364259683'
+    starting_date = "8daysAgo"
+    ending_date = "yesterday"
+
+    client = BetaAnalyticsDataClient()
+    def get_visitor_count(client, property_id):
+        request = RunReportRequest(
+            property=f"properties/{property_id}",
+            date_ranges=[{"start_date": starting_date, "end_date": ending_date}],
+            metrics=[{"name": "activeUsers"}]
+        )
+
+        response = client.run_report(request)
+        return response
+
+    response = get_visitor_count(client, PROPERTY_ID)
+
+    if response and response.row_count > 0:
+        metric_value = response.rows[0].metric_values[0].value
+    else:
+        metric_value = "N/A"  
+
+    return f'Number of visitors : {metric_value}'
+
 if __name__ == '__main__':
     app.run(debug=True)
