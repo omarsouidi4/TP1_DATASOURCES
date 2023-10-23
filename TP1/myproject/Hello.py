@@ -107,7 +107,7 @@ def google_request():
 def fetch_google_analytics_data():
 
   
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'C:\\Users\\omars\\OneDrive\\Bureau\\EPF 5A\\DATA_SOURCES\\TP1\\myproject\\datasourcestp2-0a48555e151c.json'
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'C:\\Users\\omars\\OneDrive\\Bureau\\EPF 5A\\DATA_SOURCES\\TP1\\datasourcestp2-0a48555e151c.json'
     PROPERTY_ID = '364259683'
     starting_date = "8daysAgo"
     ending_date = "yesterday"
